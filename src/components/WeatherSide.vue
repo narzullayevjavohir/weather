@@ -4,7 +4,11 @@
       Hududlar
     </h1>
     <div v-for="(region, i) in regions" :key="i">
-      <WeatherSelect :region="region" />
+      <WeatherSelect
+        :region="region"
+        :weatherRegion="weatherRegion"
+        @updateWeather="handleWeatherUpdate"
+      />
     </div>
   </div>
 </template>
@@ -12,4 +16,12 @@
 <script setup>
 import { regions } from "../constants";
 import WeatherSelect from "./WeatherSelect.vue";
+import { ref } from "vue";
+
+const weatherRegion = ref("Toshkent");
+
+const handleWeatherUpdate = (selectedRegion) => {
+  // Update the weatherRegion variable with the selected region
+  weatherRegion.value = selectedRegion;
+};
 </script>

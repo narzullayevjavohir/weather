@@ -8,10 +8,12 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted } from "vue";
 import { useWeather } from "../hooks/useWeather";
 import { ref } from "vue";
 import axios from "axios";
+
+const { weatherRegion } = defineProps(["weatherRegion"]);
 
 const temp_celsius = ref("");
 const imgUrl = ref("");
@@ -21,7 +23,7 @@ const temp_kelvin = ref(273.15);
 const { getAllWeather } = useWeather();
 
 const getWeather = async () => {
-  const weather = await getAllWeather("Tashkent", 1);
+  const weather = await getAllWeather(weatherRegion, 1);
 
   temp_celsius.value = weather.data.list[0].main.temp - temp_kelvin.value;
   temp_celsius.value = Math.round(temp_celsius.value);

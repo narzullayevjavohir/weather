@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-row h-screen w-full">
     <div class="w-[75%] flex flex-col px-10 xl:px-48 lg:px-40 md:px-20 py-10">
-      <WeatherTitle />
-      <WeatherView />
-      <WeatherDay />
-      <WeatherWeek />
+      <WeatherTitle :weatherRegion="weatherRegion" />
+      <WeatherView :weatherRegion="weatherRegion" />
+      <WeatherDay :weatherRegion="weatherRegion" />
+      <WeatherWeek :weatherRegion="weatherRegion" />
     </div>
     <div class="w-[25%] xl:w-[600px]">
-      <WeatherSide />
+      <WeatherSide :weatherRegion="weatherRegion" />
     </div>
   </div>
 </template>
@@ -18,4 +18,7 @@ import WeatherView from "./components/WeatherView.vue";
 import WeatherDay from "./components/WeatherDay.vue";
 import WeatherWeek from "./components/WeatherWeek.vue";
 import WeatherSide from "./components/WeatherSide.vue";
+import { ref } from "vue";
+
+let weatherRegion = ref("Toshkent");
 </script>

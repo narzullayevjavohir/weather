@@ -30,6 +30,8 @@ import { useWeather } from "../hooks/useWeather";
 import { weeks } from "../constants";
 import axios from "axios";
 
+const { weatherRegion } = defineProps(["weatherRegion"]);
+
 const { getAllWeather } = useWeather();
 
 const timeList = ref([]);
@@ -39,7 +41,7 @@ function getWeeks() {}
 
 const getWeather = async () => {
   const time = new Date();
-  await getAllWeather("Tashkent", 8).then((weather) => {
+  await getAllWeather(weatherRegion, 8).then((weather) => {
     for (let i = 0; i < 8; i++) {
       timeList.value.push({
         day: time.getDate() > 10 ? time.getDate() : "0" + time.getDate(),

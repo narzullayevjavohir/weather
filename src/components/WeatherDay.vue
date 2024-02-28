@@ -11,12 +11,14 @@ import WeatherDayCard from "./WeatherDayCard.vue";
 import { useWeather } from "../hooks/useWeather";
 import { onMounted, ref } from "vue";
 
+const { weatherRegion } = defineProps(["weatherRegion"]);
+
 const weatherList = ref([]);
 
 const { getAllWeather } = useWeather();
 
 const getWeather = async () => {
-  await getAllWeather("Tashkent").then((weather) =>
+  await getAllWeather(weatherRegion).then((weather) =>
     weatherList.value.push(...weather.data.list)
   );
 };

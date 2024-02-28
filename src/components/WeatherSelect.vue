@@ -7,21 +7,25 @@
       :value="region"
       v-model="isRadioValue"
       class="w-4 h-4"
+      @change="handleChange"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { defineProps, ref, getCurrentInstance } from "vue";
 
-const { region } = defineProps(["region"]);
+const { region, weatherRegion } = defineProps(["region", "weatherRegion"]);
 
-const isRadioValue = ref("Toshkent");
+let isRadioValue = ref(weatherRegion || "Toshkent");
 
-watch(
-  () => isRadioValue.value,
-  () => {
-    console.log(isRadioValue.value);
+const handleChange = () => {
+  const selectedRegion = isRadioValue.value;
+  // Access the Vue instance using getCurrentInstance
+  const instance = getCurrentInstance();
+  if (instance) {
+    // Emit the custom event from the Vue instance
+    instance.emit("updateWeather", selectedRegion);
   }
-);
+};
 </script>
